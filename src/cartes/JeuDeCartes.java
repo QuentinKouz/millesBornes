@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cartes.Probleme.Type;
+import utils.Utils;
 
 public class JeuDeCartes {
 	private Carte[] typesDeCartes;
@@ -32,6 +33,10 @@ public class JeuDeCartes {
 		for (Carte carte : typesDeCartes) {
 		    maxNombre = maxNombre + carte.getNombre();
 		}
+		
+		// Mélange des cartes
+		listeCartes = Utils.melanger(listeCartes);
+		
 	}
 	
 	public List<Carte> getListeCartes() {

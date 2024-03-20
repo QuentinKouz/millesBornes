@@ -39,6 +39,7 @@ public class TestUtils {
 		listeCartes1 = Utils.rassembler(listeCartes1);
 		System.out.println(listeCartes1);
 		System.out.println("liste rassemblée sans erreur ? " + Utils.verifierRassemblement(listeCartes1));
+		
 
   }
 
