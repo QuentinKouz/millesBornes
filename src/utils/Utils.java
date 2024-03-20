@@ -43,35 +43,18 @@ public class Utils {
     }
 
     public static <T> List<T> rassembler(List<T> liste) {
-        List<T> result = new ArrayList<>();
-        List<T> intermediaire = new ArrayList<>(liste);
-        int size = liste.size();
-        int i = 0;
-        boolean lastVal = true;
-        while (i < size-1) {
-            T current = liste.get(i);
-            for (T element : result) {
-                if (current.equals(element) && i< size-1) {
-                    i++;
-                    current = liste.get(i);
+        List<T> listeRassemblee = new ArrayList<>();
+        for (T current : liste) {
+        	if(!listeRassemblee.contains(current)) {
+                int occ = Collections.frequency(liste, current);
+
+                // Ajouter les copies de l'élément actuel
+                for (int k = 0; k < occ; k++) {
+                    listeRassemblee.add(current);
                 }
-            }
-            int j = i+1; 
-            result.add(current);
-            while (j < size) {
-                T elementCheck = liste.get(j);
-                if (elementCheck.equals(current)) {
-                    result.add(elementCheck);
-                }
-                j++;
-            }
-            i++;
+        	}
         }
-        
-        if (i < size && !result.contains(liste.get(i))) {
-            result.add(liste.get(i));
-        }
-        return result;
+        return listeRassemblee;
     }
     
     public static <T> boolean verifierRassemblement(List<T> liste) {
