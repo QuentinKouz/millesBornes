@@ -1,6 +1,8 @@
 package jeu;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import cartes.*;
@@ -14,13 +16,13 @@ public class Joueur {
 	private Set<Botte> ensembleBottes;
 	private Main main;
 	
-	public Joueur(String nom, List<Limite> limitesVitesse, List<Bataille> pileBataille, List<Borne> collectionBornes, Set<Botte> ensembleBottes, Main main) {
+	public Joueur(String nom) {
 	        this.nom = nom;
-	        this.limitesVitesse = limitesVitesse;
-	        this.pileBataille = pileBataille;
-	        this.collectionBornes = collectionBornes;
-	        this.ensembleBottes = ensembleBottes;
-	        this.main = main;
+	        this.limitesVitesse = new ArrayList<>();
+	        this.pileBataille = new ArrayList<>();
+	        this.collectionBornes = new ArrayList<>();
+	        this.ensembleBottes = new HashSet<>();
+	        this.main = new MainAsListe();
 	    }
 	 
 	public String getNom() {
@@ -82,20 +84,6 @@ public class Joueur {
         }
         return totalKM;
     }
-	 
-    public int getLimite() {
-    	boolean prioritaire = false;
-    	for (Botte botte : ensembleBottes) {
-    		if (botte.getType() == Type.FEU) {
-    			prioritaire = true;
-    		}
-    	}
-        if (limitesVitesse.isEmpty() || limitesVitesse.get(limitesVitesse.size() - 1) instanceof FinLimite || prioritaire) {
-            return 200; // Limite de vitesse de 200 si la pile de limites est vide, si le sommet est une fin de limite, ou si le joueur a la botte de type FEU
-        } else {
-            return 50; // Sinon, la limite de vitesse est de 50
-        }
-    }
     
     public boolean estPrioritaire() {
     	for (Botte botte : ensembleBottes) {
@@ -105,6 +93,17 @@ public class Joueur {
     	}
 		return false;
 	}
+	 
+    public int getLimite() {
+    	boolean prioritaire = estPrioritaire();
+        if (limitesVitesse.isEmpty() || limitesVitesse.get(limitesVitesse.size() - 1) instanceof FinLimite || prioritaire) {
+            return 200; // Limite de vitesse de 200 si la pile de limites est vide, si le sommet est une fin de limite, ou si le joueur a la botte de type FEU
+        } else {
+            return 50; // Sinon, la limite de vitesse est de 50
+        }
+    }
+    
+
     
     public boolean estBloque() {
     	boolean prioritaire = estPrioritaire();

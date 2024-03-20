@@ -11,7 +11,7 @@ import jeu.MainAsListe;
 public class TestEstBloque {
 	public static void main(String[] args) {
         // Création d'un joueur avec un nom et des listes vides
-        Joueur joueur = new Joueur("Alice", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new HashSet<>(), new MainAsListe());
+        Joueur joueur = new Joueur("Alice");
         
         Carte prio = new Botte(1, Type.FEU);
         Carte as = new Botte(1, Type.ACCIDENT);

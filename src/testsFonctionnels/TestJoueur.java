@@ -13,7 +13,7 @@ import cartes.Probleme.Type;
 public class TestJoueur {
 	public static void main(String[] args) {
         // Création d'un joueur avec un nom et des listes vides
-        Joueur joueur = new Joueur("Alice", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new HashSet<>(), new MainAsListe());
+        Joueur joueur = new Joueur("Alice");
 
         // Création de quelques bornes avec des distances
         Borne borne1 = new Borne(1,50); // Distance de 50 km
@@ -39,13 +39,13 @@ public class TestJoueur {
         Set<Botte> ensembleBottes = new HashSet<>();
         ensembleBottes.add(botteFeu);
 
-        joueur = new Joueur("Bob", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), ensembleBottes, new MainAsListe());
+        joueur = new Joueur("Bob");
 
         // Test de getLimite avec botte de type FEU
         System.out.println("Limite de vitesse en cours (avec botte FEU) : " + joueur.getLimite() + " km/h");
 
         // Supposons que la pile de limites est vide
-        joueur = new Joueur("Charlie", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new HashSet<>(), new MainAsListe());
+        joueur = new Joueur("Charlie");
 
         // Test de getLimite avec pile de limites vide
         System.out.println("Limite de vitesse en cours (pile de limites vide) : " + joueur.getLimite() + " km/h");
@@ -55,8 +55,8 @@ public class TestJoueur {
         List<Limite> limitesVitesse = new ArrayList<>();
         limitesVitesse.add(finLimite);
 
-        joueur = new Joueur("David", limitesVitesse, new ArrayList<>(), new ArrayList<>(), new HashSet<>(), new MainAsListe());
-
+        joueur = new Joueur("David");
+        joueur.getLimitesVitesse().addAll(limitesVitesse);
         // Test de getLimite avec sommet de la pile comme fin de limite
         System.out.println("Limite de vitesse en cours (sommet de la pile comme fin de limite) : " + joueur.getLimite() + " km/h");
     
@@ -66,7 +66,8 @@ public class TestJoueur {
 
 	     limitesVitesse2.add(new DebutLimite(60)); // Ajout d'une limite de vitesse non vide à la pile
 	
-	     joueur = new Joueur("Eve", limitesVitesse2, new ArrayList<>(), new ArrayList<>(), new HashSet<>(), new MainAsListe());
+	     joueur = new Joueur("Eve");
+	     joueur.getLimitesVitesse().addAll(limitesVitesse2);
 	
 	     // Test de getLimite avec les conditions pour un résultat de 50
 	     System.out.println("Limite de vitesse en cours (résultat de 50 avec une carte DébutLimite (60)) : " + joueur.getLimite() + " km/h");
